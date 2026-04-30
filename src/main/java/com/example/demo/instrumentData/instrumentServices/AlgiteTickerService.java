@@ -133,7 +133,6 @@ public class AlgiteTickerService {
     }
 
 
-
     public double getCurrentNiftyLTP() throws Exception, KiteException {
         // NIFTY 50 index token on NSE
         String[] instrumentToken = new String[1];  // You can also use Kite instrument token map

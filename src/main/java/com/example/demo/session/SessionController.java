@@ -1,4 +1,5 @@
 package com.example.demo.session;
+import com.example.demo.dataGeneration.AlgiteCandle;
 import com.zerodhatech.kiteconnect.KiteConnect;
 import com.zerodhatech.kiteconnect.kitehttp.exceptions.KiteException;
 import com.zerodhatech.models.LTPQuote;
@@ -79,6 +80,8 @@ public class SessionController {
         ResponseEntity response = new ResponseEntity(nifty.lastPrice, HttpStatus.OK);
         return response;
     }
+
+
 
 
 }
