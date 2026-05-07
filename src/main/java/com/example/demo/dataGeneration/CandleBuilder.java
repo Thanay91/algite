@@ -1,9 +1,12 @@
 package com.example.demo.dataGeneration;
 
 import com.example.demo.Stratagy.IndicatorConsumer;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
-
+@Getter
+@Setter
 public class CandleBuilder implements TickConsumer {
     private final long timeframeMillis;
     private AlgiteCandle current;
@@ -55,5 +58,9 @@ public class CandleBuilder implements TickConsumer {
         if (current != null) {
             consumers.forEach(c -> c.onCandle(current));
         }
+    }
+
+    private void register(CandleConsumer consumer){
+        this.consumers.add(consumer);
     }
 }

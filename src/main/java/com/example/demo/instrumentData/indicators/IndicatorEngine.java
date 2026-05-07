@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class IndicatorEngine implements CandleConsumer {
 
-    private final List<Indicator> indicators;
-    private final List<IndicatorConsumer> consumers;
+    private final List<CandleIndicator> indicators;
+    private final List<IndicatorConsumer> strategies;
 
     public IndicatorEngine(
-            List<Indicator> indicators,
-            List<IndicatorConsumer> consumers
+            List<CandleIndicator> indicators,
+            List<IndicatorConsumer> strategies
     ) {
         this.indicators = indicators;
-        this.consumers = consumers;
+        this.strategies = strategies;
     }
 
     @Override
@@ -26,18 +26,18 @@ public class IndicatorEngine implements CandleConsumer {
 
         Map<String, Double> values = new HashMap<>();
 
-        for (Indicator indicator : indicators) {
-            indicator.onCandle(candle);
-            values.put(indicator.name(), indicator.getValue());
+        for (CandleIndicator indicator : indicators) {
+            indicator.update(candle);
+            indicator.value().ifPresent(v ->
+                    values.put(indicator.name(), v)
+            );
         }
 
-        IndicatorSnapshot snapshot = new IndicatorSnapshot(
-                candle,
-                values
-        );
+        IndicatorSnapshot snapshot =
+                new IndicatorSnapshot(candle, values);
 
-        for (IndicatorConsumer consumer : consumers) {
-            consumer.onIndicator(snapshot);
+        for (IndicatorConsumer strategy : strategies) {
+            strategy.onIndicator(snapshot);
         }
     }
 }

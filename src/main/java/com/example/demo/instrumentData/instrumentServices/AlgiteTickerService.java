@@ -110,10 +110,10 @@ public class AlgiteTickerService {
 //                }
 //            }
 
-                for (Tick kiteTick : ticks) {
-                    AlgiteTick algiteTick = AlgiteTick.fromKiteTick(kiteTick, atmOptions);
-                    tickRouter.onTick(algiteTick);
-                }
+//                for (Tick kiteTick : ticks) {
+//                    AlgiteTick algiteTick = AlgiteTick.fromKiteTick(kiteTick, atmOptions);
+//                    tickRouter.onTick(algiteTick);
+//                }
             }
         });
 

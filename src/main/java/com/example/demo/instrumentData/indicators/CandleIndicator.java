@@ -3,7 +3,10 @@ package com.example.demo.instrumentData.indicators;
 import com.example.demo.dataGeneration.AlgiteCandle;
 import com.example.demo.dataGeneration.CandleConsumer;
 
-public interface Indicator extends CandleConsumer {
+import java.util.Optional;
+
+public interface CandleIndicator {
     String name();
-    Double getValue();
+    void update(AlgiteCandle candle);
+    Optional<Double> value();
 }
