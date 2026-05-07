@@ -1,5 +1,7 @@
 package com.example.demo.dataGeneration;
 
+import com.example.demo.Stratagy.IndicatorConsumer;
+
 import java.util.List;
 
 public class CandleBuilder implements TickConsumer {

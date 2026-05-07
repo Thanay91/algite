@@ -32,6 +32,11 @@ public class SmaIndicator implements Indicator{
     }
 
     @Override
+    public String name() {
+        return "SMA";
+    }
+
+    @Override
     public Double getValue() {
         return value;
     }

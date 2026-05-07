@@ -18,6 +18,7 @@ public class TickRouter implements TickConsumer{
         consumers.put(instrumentToken, consumer);
     }
 
+    @Override
     public void onTick(AlgiteTick tick) {
         TickConsumer consumer = consumers.get(tick.instrumentToken());
         if (consumer != null) {

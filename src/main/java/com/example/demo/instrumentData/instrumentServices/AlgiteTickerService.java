@@ -1,7 +1,6 @@
 package com.example.demo.instrumentData.instrumentServices;
 
-import com.example.demo.Stratagy.DummyStrategy;
-import com.example.demo.Stratagy.StrategyConsumer;
+
 import com.example.demo.dataGeneration.AlgiteTick;
 import com.example.demo.dataGeneration.CandleBuilder;
 import com.example.demo.dataGeneration.TickRouter;
@@ -79,7 +78,7 @@ public class AlgiteTickerService {
                 for (long token : subscribedTokens) {
                     CandleBuilder builder = new CandleBuilder(
                             ONE_MIN,
-                            List.of(new DummyStrategy()),
+                            List.of(),
                             token
                     );
                     tickRouter.register(token, builder);
