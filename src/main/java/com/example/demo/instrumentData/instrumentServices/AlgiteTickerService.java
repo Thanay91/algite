@@ -1,10 +1,13 @@
 package com.example.demo.instrumentData.instrumentServices;
 
 
+import com.example.demo.Stratagy.DummyStrategy;
 import com.example.demo.dataGeneration.AlgiteTick;
 import com.example.demo.dataGeneration.CandleBuilder;
 import com.example.demo.dataGeneration.TickRouter;
 import com.example.demo.instrumentData.Instrument;
+import com.example.demo.instrumentData.indicators.IndicatorEngine;
+import com.example.demo.instrumentData.indicators.SmaIndicator;
 import com.example.demo.session.AccessTokenRepo;
 import com.example.demo.session.KiteSession;
 import com.zerodhatech.kiteconnect.KiteConnect;
@@ -74,11 +77,14 @@ public class AlgiteTickerService {
 
                 System.out.println("Subscribing tokens: " + subscribedTokens);
                 long ONE_MIN = 60_000L;
-
+                IndicatorEngine engine = new IndicatorEngine(
+                        List.of(new SmaIndicator(20), new SmaIndicator(50)),
+                        List.of(new DummyStrategy())
+                );
                 for (long token : subscribedTokens) {
                     CandleBuilder builder = new CandleBuilder(
                             ONE_MIN,
-                            List.of(),
+                            List.of(engine),
                             token
                     );
                     tickRouter.register(token, builder);
@@ -92,9 +98,8 @@ public class AlgiteTickerService {
         // 🔹 On ticks
         kiteTicker.setOnTickerArrivalListener(ticks -> {
             for (Tick tick : ticks) {
-                Long token = tick.getInstrumentToken();
-                double ltp = tick.getLastTradedPrice();
-                Long volTraded = tick.getVolumeTradedToday();
+                AlgiteTick algiteTick = AlgiteTick.fromKiteTick(tick, atmOptions);
+                tickRouter.onTick(algiteTick);
 //
                 // Find trading symbol from your cached instruments
 //                Instrument inst = atmOptions.stream()
