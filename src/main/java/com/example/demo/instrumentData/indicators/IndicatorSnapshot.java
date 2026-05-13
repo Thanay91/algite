@@ -7,5 +7,4 @@ import java.util.Map;
 public record IndicatorSnapshot(
     AlgiteCandle candle,
     Map<String, Double> indicators
-
 ){}

@@ -28,6 +28,7 @@ public class SmaIndicator implements CandleIndicator {
         if (closes.size() > period) {
             sum -= closes.poll();
         }
+        System.out.println(candle.instrumentName() + ": " + sum);
     }
 
     @Override

@@ -17,8 +17,8 @@ public class DummyStrategy implements IndicatorConsumer {
             return;
         }
 
-        if (sma20 > sma50) {
-            System.out.println("BUY signal");
+        if (sma20 - sma50 >20) {
+            System.out.println("BUY signal: " + snapshot.candle().instrumentName() +" SMA20: " + sma20 + "| SMA50: " + sma50 );
         } else if (sma20 < sma50) {
             System.out.println("SELL signal");
         }

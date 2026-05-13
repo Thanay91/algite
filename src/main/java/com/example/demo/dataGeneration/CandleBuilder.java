@@ -56,6 +56,7 @@ public class CandleBuilder implements TickConsumer {
 
     private void closeCurrentCandle() {
         if (current != null) {
+            System.out.println(current.instrumentName() + " close : " + current.close());
             consumers.forEach(c -> c.onCandle(current));
         }
     }

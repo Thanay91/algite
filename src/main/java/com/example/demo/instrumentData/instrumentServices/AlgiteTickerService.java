@@ -64,7 +64,7 @@ public class AlgiteTickerService {
         LocalDate expiry = instrumentQueryService.getNearestExpiry();
         double spot = getCurrentNiftyLTP(); // or get from live NIFTY price
 
-        List<Instrument> atmOptions = instrumentQueryService.getNiftyATMOptions(expiry, spot, 100);
+        List<Instrument> atmOptions = instrumentQueryService.getNiftyATMOptions(expiry, spot, 50);
 
         // 🔹 On connect
         kiteTicker.setOnConnectedListener(new OnConnect() {
@@ -147,6 +147,4 @@ public class AlgiteTickerService {
         // Return last price
         return quote.get("NSE:NIFTY 50").lastPrice;
     }
-
-
 }
